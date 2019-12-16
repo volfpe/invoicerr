@@ -1,7 +1,8 @@
 {
+  "private": true,
+  "workspaces": ["packages/*"],
   "name": "invoicerr",
   "version": "1.0.0",
-  "main": "index.js",
   "author": "Petr Volf <petr.volf96@gmail.com>",
   "license": "MIT"
 }
