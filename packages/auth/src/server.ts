@@ -1,8 +1,20 @@
 import express from 'express'
+import config from './config'
+import loaders from './loaders'
+import { AuthService } from './types'
 
-const app = express()
-const port = 3000
+const server = async () => {
+    const app = express()
+    const port = config.port
 
-app.get('/', (req, res) => res.send('Hello World!'))
+    const authService: AuthService = {
+        expressApp: app
+    }
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+    // load everything we need to run the app
+    await loaders(authService);
+    
+    app.listen(port, () => console.log(`Auth service listening on port ${port}!`))
+}
+
+server()
