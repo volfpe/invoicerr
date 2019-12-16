@@ -1,9 +1,10 @@
-import expressLoader from './express';
+import expressLoader from './express'
+import mongooseLoader from './mongoose'
 import { AuthService } from '../types'
 
 export default async (app: AuthService) => {
-//  const mongoConnection = await mongooseLoader();
-//  console.log('MongoDB Intialized');
+  await mongooseLoader();
+  console.log('MongoDB Intialized');
   await expressLoader(app);
   console.log('Express Intialized');
 }
