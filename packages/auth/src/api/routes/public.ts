@@ -1,4 +1,4 @@
-import { Router, Request, Response, NextFunction } from 'express'
+import { Router } from 'express'
 import AuthService from '../../services/auth'
 import { ValidationApiError } from '../../types/errors';
 import { runAsyncWrapper } from '..';

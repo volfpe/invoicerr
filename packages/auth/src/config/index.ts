@@ -5,4 +5,5 @@ export default {
         password: process.env.PASSWORD,
     },
     jwtSecret: process.env.JWT_SECRET || 'secret',
+    communicationSecret: process.env.COMMUNICATION_SECRET || 'secret'
 }

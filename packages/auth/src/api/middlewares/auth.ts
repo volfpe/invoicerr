@@ -1,5 +1,16 @@
 import express from 'express'
 import authService from '../../services/auth'
+import config from '../../config'
+
+export const interComMiddleware: express.RequestHandler = async (req, res, next) => {
+    const authHeader = req.headers.authorization
+    if (authHeader === config.communicationSecret) {
+        next()
+        return
+    }
+    res.status(401).send('Invalid credentials')
+    return
+}
 
 export const authMiddleware: express.RequestHandler = async (req, res, next) => {
     // get jwt token from header
