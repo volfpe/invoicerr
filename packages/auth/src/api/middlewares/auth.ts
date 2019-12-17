@@ -5,13 +5,13 @@ export const ensureRole: (roles: string[]) => express.RequestHandler = (roles) =
     // get jwt token from header
     const authHeader = req.headers.authorization
     if (!authHeader) {
-        res.status(403).send('No auth header sent')
+        res.status(401).send('No auth header sent')
         return
     }
     
     const user = await authService.getUser(authHeader)
     if (!user) {
-        res.status(403).send('Invalid token')
+        res.status(401).send('Invalid token')
         return
     }
 
