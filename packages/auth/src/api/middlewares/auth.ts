@@ -34,3 +34,14 @@ export const ensureRole: (roles: string[]) => express.RequestHandler = (roles) =
     res.status(403).send('Insufficient permissions')
     return
 }
+
+export const ensureLoggedIn: express.RequestHandler = async (req, res, next) => {
+    const user = res.locals.user
+    if (!user) {
+        res.status(401).send('Please log in')
+        return
+    }
+
+    next()
+    return
+}

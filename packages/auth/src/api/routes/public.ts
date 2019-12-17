@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express'
 import AuthService from '../../services/auth'
 import { ValidationApiError } from '../../types/errors';
 import { runAsyncWrapper } from '..';
-import { ensureRole } from '../middlewares/auth';
+import { ensureRole, ensureLoggedIn } from '../middlewares/auth';
 
 const route = Router();
 
@@ -18,12 +18,13 @@ export default (app: Router) => {
     res.send(true)
   }));
 
-  route.post('/changePassword', runAsyncWrapper(async (req, res) => {
-    try {
-      await AuthService.changePassword(req.body.username, req.body.password, req.body.role);
-    } catch(e) {
-      throw new ValidationApiError('Error! Username probably already exists')
+  route.post('/changePassword', ensureLoggedIn, runAsyncWrapper(async (req, res) => {
+
+    const result = await AuthService.changePassword(res.locals.user._id, req.body.oldPassword, req.body.newPassword);
+    if (!result) {
+      throw new ValidationApiError('Passwords do not match!')
     }
+
     res.send(true)
   }));
 

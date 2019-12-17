@@ -50,8 +50,8 @@ const AuthService = {
             throw new Error('Username already exists!');
         }
     },
-    changePassword: async (username: string, oldPassword: string, newPassword: string): Promise<boolean> => {
-        const user = await AuthModel.where('username', username).findOne()
+    changePassword: async (id: string, oldPassword: string, newPassword: string): Promise<boolean> => {
+        const user = await AuthModel.where('_id', id).findOne()
         if (!user) {
             return false
         }
@@ -59,7 +59,7 @@ const AuthService = {
         if (!passwordMatch) {
             return false
         }
-        const newPasswordHashed = hashPassword(newPassword)
+        const newPasswordHashed = await hashPassword(newPassword)
         user.password = newPasswordHashed
         await user.save()
         return true
