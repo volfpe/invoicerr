@@ -18,6 +18,15 @@ export default (app: Router) => {
     res.send(true)
   }));
 
+  route.post('/editUser', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
+    try {
+      await AuthService.editUser(req.body.id, req.body.username, req.body.role, req.body.isActive, req.body.password)
+    } catch(e) {
+      throw new ValidationApiError('Username probably already exists')
+    }
+    res.send(true)
+  }));
+
   route.post('/changePassword', ensureLoggedIn, runAsyncWrapper(async (req, res) => {
 
     const result = await AuthService.changePassword(res.locals.user._id, req.body.oldPassword, req.body.newPassword);

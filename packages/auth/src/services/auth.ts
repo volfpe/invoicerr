@@ -50,6 +50,16 @@ const AuthService = {
             throw new Error('Username already exists!');
         }
     },
+    editUser: async (id: string, username: string, role: string, isActive: string, password?: string) => {
+        const user = await AuthModel.where('_id', id).findOne()
+        user.username = username
+        user.role = role
+        user.isActive = isActive
+        if (password) {
+            user.password = await hashPassword(password)
+        }
+        await user.save()
+    },
     changePassword: async (id: string, oldPassword: string, newPassword: string): Promise<boolean> => {
         const user = await AuthModel.where('_id', id).findOne()
         if (!user) {
@@ -66,7 +76,7 @@ const AuthService = {
     },
     loginUser: async (username: string, password: string) => {
         const user = await AuthModel.where('username', username).findOne()
-        if (!user) {
+        if (!user || !user.isActive) {
             return false
         }
         const passwordMatch = await validatePassword(password, user.password)
