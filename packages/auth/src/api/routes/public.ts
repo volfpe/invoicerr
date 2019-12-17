@@ -18,6 +18,15 @@ export default (app: Router) => {
     res.send(true)
   }));
 
+  route.post('/changePassword', runAsyncWrapper(async (req, res) => {
+    try {
+      await AuthService.changePassword(req.body.username, req.body.password, req.body.role);
+    } catch(e) {
+      throw new ValidationApiError('Error! Username probably already exists')
+    }
+    res.send(true)
+  }));
+
   route.post('/login', runAsyncWrapper(async (req, res) => {
     const token = await AuthService.loginUser(req.body.username, req.body.password);
     if (!token) {

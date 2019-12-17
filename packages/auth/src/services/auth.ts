@@ -32,7 +32,7 @@ const validatePassword = (password: string, hash: string): Promise<boolean> => {
     })
 }
 
-const authService = {
+const AuthService = {
     addUser: async (username: string, password: string, role: string) => {
 
         const hashedPassword = await hashPassword(password)
@@ -49,6 +49,20 @@ const authService = {
         } catch (e) {
             throw new Error('Username already exists!');
         }
+    },
+    changePassword: async (username: string, oldPassword: string, newPassword: string): Promise<boolean> => {
+        const user = await AuthModel.where('username', username).findOne()
+        if (!user) {
+            return false
+        }
+        const passwordMatch = await validatePassword(oldPassword, user.password)
+        if (!passwordMatch) {
+            return false
+        }
+        const newPasswordHashed = hashPassword(newPassword)
+        user.password = newPasswordHashed
+        await user.save()
+        return true
     },
     loginUser: async (username: string, password: string) => {
         const user = await AuthModel.where('username', username).findOne()
@@ -80,4 +94,4 @@ const authService = {
     }
 }
 
-export default authService
+export default AuthService

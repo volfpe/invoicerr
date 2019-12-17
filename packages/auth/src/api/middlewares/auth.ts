@@ -1,17 +1,27 @@
 import express from 'express'
 import authService from '../../services/auth'
 
-export const ensureRole: (roles: string[]) => express.RequestHandler = (roles) => async (req, res, next) => {
+export const authMiddleware: express.RequestHandler = async (req, res, next) => {
     // get jwt token from header
     const authHeader = req.headers.authorization
     if (!authHeader) {
-        res.status(401).send('No auth header sent')
+        next()
         return
     }
-    
+
     const user = await authService.getUser(authHeader)
+    if (user) {
+        res.locals.user = user
+    }
+    next()
+    return
+}
+
+export const ensureRole: (roles: string[]) => express.RequestHandler = (roles) => async (req, res, next) => {
+
+    const user = res.locals.user
     if (!user) {
-        res.status(401).send('Invalid token')
+        res.status(401).send('Invalid credentials')
         return
     }
 
