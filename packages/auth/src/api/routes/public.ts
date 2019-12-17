@@ -10,11 +10,21 @@ export default (app: Router) => {
 
   route.get('/', runAsyncWrapper(async (req, res, next) => {
     try {
-      await AuthService.addUser('aba', 'bb', 'user');
+      await AuthService.addUser('volfpea', 'bb', 'user');
     } catch(e) {
       throw new ValidationApiError('Error! Username probably already exists')
     }
     res.send('Hello')
+  }));
+
+  route.get('/login', runAsyncWrapper(async (req, res, next) => {
+
+    const token = await AuthService.loginUser('volfpea', 'bb');
+    if (!token) {
+      throw new ValidationApiError('Error! Credentials are invalid')
+    }
+
+    res.send(token)
   }));
 
   route.get(

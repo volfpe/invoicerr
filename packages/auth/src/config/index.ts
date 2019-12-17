@@ -4,4 +4,5 @@ export default {
         url: process.env.URL || 'mongodb://localhost:28000/invoicerr',
         password: process.env.PASSWORD,
     },
+    jwtSecret: process.env.JWT_SECRET || 'secret',
 }
