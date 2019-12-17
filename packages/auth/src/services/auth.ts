@@ -3,6 +3,13 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import config from '../config'
 
+interface UserTokenData {
+    _id: string
+    isActive: boolean
+    username: string
+    role: string
+}
+
 const hashPassword = (password: string): Promise<string> => {
     return new Promise((resolve, reject) => {
         bcrypt.hash(password, 10, function(err, hash) {
@@ -52,10 +59,24 @@ const authService = {
         if (!passwordMatch) {
             return false
         }
-        const userObject = user.toObject()
-        delete userObject.password
+        const userTemp = user.toObject()
+        delete userTemp.password
+        const userObject: UserTokenData = userTemp;
         const token = jwt.sign(userObject, config.jwtSecret);
         return token
+    },
+    getUser: async (jwtToken: string) => {
+        try {
+            const userData = jwt.verify(jwtToken, config.jwtSecret) as UserTokenData;
+            // check if user have not been deactivated
+            const user = await AuthModel.where('_id', userData._id).findOne()
+            if (!user || !user.isActive || user.role != userData.role) {
+                return null
+            }
+            return user.toObject()
+        } catch(e) {
+            return null
+        }
     }
 }
 

@@ -7,4 +7,5 @@ export default (app: Router) => {
   app.use('/internal', route);
 
   route.get('/', (req, res) => res.send('Hello from internal'));
+  
 };
