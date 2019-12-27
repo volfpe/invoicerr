@@ -1,16 +1,5 @@
 import express from 'express'
 import authService from '../../services/auth'
-import config from '../../config'
-
-export const interComMiddleware: express.RequestHandler = async (req, res, next) => {
-    const authHeader = req.headers.authorization
-    if (authHeader === config.communicationSecret) {
-        next()
-        return
-    }
-    res.status(401).send('Invalid credentials')
-    return
-}
 
 export const authMiddleware: express.RequestHandler = async (req, res, next) => {
     // get jwt token from header
@@ -28,31 +17,3 @@ export const authMiddleware: express.RequestHandler = async (req, res, next) => 
     return
 }
 
-export const ensureRole: (roles: string[]) => express.RequestHandler = (roles) => async (req, res, next) => {
-
-    const user = res.locals.user
-    if (!user) {
-        res.status(401).send('Invalid credentials')
-        return
-    }
-
-    // check role
-    if (roles.includes(user.role)) {
-        next()
-        return
-    }
-
-    res.status(403).send('Insufficient permissions')
-    return
-}
-
-export const ensureLoggedIn: express.RequestHandler = async (req, res, next) => {
-    const user = res.locals.user
-    if (!user) {
-        res.status(401).send('Please log in')
-        return
-    }
-
-    next()
-    return
-}

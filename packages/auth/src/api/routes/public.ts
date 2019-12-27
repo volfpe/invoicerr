@@ -1,8 +1,10 @@
 import { Router } from 'express'
 import AuthService from '../../services/auth'
-import { ValidationApiError } from '../../types/errors';
-import { runAsyncWrapper } from '..';
-import { ensureRole, ensureLoggedIn } from '../middlewares/auth';
+import { Express, Errors } from 'shared';
+
+const { ValidationApiError } = Errors
+
+const { runAsyncWrapper, ensureRole, ensureLoggedIn } = Express
 
 const route = Router();
 

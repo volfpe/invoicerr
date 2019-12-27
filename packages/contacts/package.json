@@ -1,13 +1,12 @@
 {
-  "name": "invoicerr_auth",
+  "name": "invoicerr_contacts",
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^3.0.7",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.1",
-    "shared": "1.0.0"
+    "mongoose": "^5.8.1"
   },
   "scripts": {
     "dev": "nodemon --config \"./nodemon.json\"/"
