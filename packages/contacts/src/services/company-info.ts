@@ -14,7 +14,7 @@ const CompanyInfoService = {
     },
     getCompanyInfo: async () => {
         const info = await CompanyInfoModel.find().sort({ createdAt: 'desc' }).limit(1)
-        return info
+        return info[0]
     }
 }
 

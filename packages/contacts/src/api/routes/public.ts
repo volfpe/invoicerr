@@ -29,9 +29,14 @@ export default (app: Router) => {
     }))
 
     // delete contact // todo different role
-    route.delete('/contact', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
-        await ContactService.deleteContact(req.body.id)
+    route.delete('/contact/:contactId', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
+        await ContactService.deleteContact(req.params.contactId)
         res.send(true)
+    }))
+
+    // get contact by id
+    route.get('/contact/:contactId', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
+        res.send(await ContactService.getContactById(req.params.contactId))
     }))
 
     // get company info
