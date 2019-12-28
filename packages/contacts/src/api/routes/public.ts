@@ -1,15 +1,35 @@
 import { Router } from 'express'
 import { Express } from 'shared'
-import { ensureLoggedIn } from 'shared/build/express'
+import ContactService from '../../services/contact'
 
-const { runAsyncWrapper, ensureRole } = Express
+const { runAsyncWrapper, ensureRole, ensureLoggedIn } = Express
 
 const route = Router()
 
 export default (app: Router) => {
     app.use('/public', route)
 
-    route.get('/hello', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
-        res.send('hello')
+    // get all contacts
+    route.get('/contacts', ensureLoggedIn, runAsyncWrapper(async (req, res) => {
+        const contacts = await ContactService.getAllContacts()
+        res.send(contacts)
+    }))
+
+    // add contact // todo different role
+    route.post('/contact', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
+        await ContactService.addContact(req.body.name, req.body.company, req.body.street, req.body. city, req.body.country, req.body.ic, req.body.dic)
+        res.send(true)
+    }))
+
+    // edit contact // todo different role
+    route.put('/contact', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
+        const contact = await ContactService.editContact(req.body.id, req.body.name, req.body.company, req.body.street, req.body. city, req.body.country, req.body.ic, req.body.dic)
+        res.send(contact)
+    }))
+
+    // delete contact // todo different role
+    route.delete('/contact', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
+        await ContactService.deleteContact(req.body.id)
+        res.send(true)
     }))
 }

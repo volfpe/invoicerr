@@ -16,6 +16,7 @@
         {
             "type": "node",
             "request": "attach",
+            "outFiles": [ "${workspaceFolder}/**/node_modules/**/*.js" ],
             "port": 9230,
             "name": "Invoicerr contacts debug",
             "address": "localhost",
