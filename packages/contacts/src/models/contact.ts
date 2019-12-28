@@ -1,5 +1,16 @@
 import mongoose from 'mongoose'
 
+interface IContact extends mongoose.Document {
+    name: string
+    company: string
+    street: string
+    city: string
+    country: string
+    ic: string
+    dic: string
+    isActive: boolean
+}
+
 const ContactSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -36,4 +47,4 @@ const ContactSchema = new mongoose.Schema({
     { timestamps: true }
 )
 
-export default mongoose.model('Contact', ContactSchema)
+export default mongoose.model<IContact>('Contact', ContactSchema)

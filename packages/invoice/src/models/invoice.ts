@@ -1,5 +1,27 @@
 import mongoose from 'mongoose'
 
+interface IInvoiceRecord extends mongoose.Document {
+    name: string
+    pricePerItem: number
+    quantity: number
+}
+
+interface IInvoiceContact extends mongoose.Document {
+    company: string
+    street: string
+    city: string
+    country: string
+    ic: string
+    dic: string
+}
+
+interface IInvoice extends mongoose.Document {
+    seller: IInvoiceContact,
+    buyer: IInvoiceContact,
+    items: IInvoiceRecord[],
+    isValid: boolean
+}
+
 const InvoiceRecord = new mongoose.Schema({
     name: {
         type: String,
@@ -60,7 +82,7 @@ const InvoiceSchema = new mongoose.Schema({
     { timestamps: true }
 )
 
-InvoiceRecord.virtual('totalPrice').get(function(this: any) {
+InvoiceRecord.virtual('totalPrice').get(function(this: IInvoiceRecord) {
     return this.pricePerItem * this.quantity
 })
 
@@ -68,4 +90,4 @@ InvoiceSchema.virtual('totalPrice').get(function(this: any) {
     return this.items.reduce((acc: number, item: any) => acc + item.totalPrice, 0)
 })
 
-export default mongoose.model('Invoice', InvoiceSchema)
+export default mongoose.model<IInvoice>('Invoice', InvoiceSchema)

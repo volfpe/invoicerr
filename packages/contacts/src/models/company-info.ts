@@ -1,5 +1,14 @@
 import mongoose from 'mongoose'
 
+interface ICompanyInfo extends mongoose.Document {
+    company: string
+    street: string
+    city: string
+    country: string
+    ic: string
+    dic: string
+}
+
 const CompanyInfoSchema = new mongoose.Schema({
     company: {
         type: String,
@@ -27,4 +36,4 @@ const CompanyInfoSchema = new mongoose.Schema({
     { timestamps: true }
 )
 
-export default mongoose.model('company-info', CompanyInfoSchema)
+export default mongoose.model<ICompanyInfo>('company-info', CompanyInfoSchema)

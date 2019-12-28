@@ -1,4 +1,4 @@
-import AuthModel from '../models/auth'
+import AuthModel, { IRoles } from '../models/auth'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import config from '../config'
@@ -33,7 +33,7 @@ const validatePassword = (password: string, hash: string): Promise<boolean> => {
 }
 
 const AuthService = {
-    addUser: async (username: string, password: string, role: string) => {
+    addUser: async (username: string, password: string, role: IRoles) => {
 
         const hashedPassword = await hashPassword(password)
 
@@ -43,6 +43,7 @@ const AuthService = {
             role: role,
             isActive: true
         })
+
         try {
               await newUser.save()
               return newUser
@@ -50,7 +51,7 @@ const AuthService = {
             throw new Error('Username already exists!');
         }
     },
-    editUser: async (id: string, username: string, role: string, isActive: string, password?: string) => {
+    editUser: async (id: string, username: string, role: IRoles, isActive: string, password?: string) => {
         const user = await AuthModel.where('_id', id).findOne()
         user.username = username
         user.role = role
