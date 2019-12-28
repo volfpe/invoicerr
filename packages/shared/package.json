@@ -9,7 +9,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "watch": "tsc -w"
   },
   "devDependencies": {
     "typescript": "^3.7.3"
