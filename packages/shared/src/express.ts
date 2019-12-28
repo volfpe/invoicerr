@@ -14,7 +14,7 @@ export const runAsyncWrapper = (callback: express.RequestHandler): express.Reque
 	}
 }
 
-export const authMiddleware: (authUrl: string, secret: string) => express.RequestHandler = (authUrl, secret) => async (req, res, next) => {
+export const authMiddleware: (authUrl: string, secret: string) => express.RequestHandler = (authUrl, secret) => runAsyncWrapper(async (req, res, next) => {
     // get jwt token from header
     const authHeader = req.headers.authorization
     if (!authHeader) {
@@ -23,19 +23,18 @@ export const authMiddleware: (authUrl: string, secret: string) => express.Reques
     }
 
     const user = await axios.post(authUrl + '/internal/getUser', {
-		headers: {
+		token: authHeader
+	}, {
+        headers: {
 			authorization: secret
 		},
-		data: {
-			token: authHeader
-		}
-	})
+    })
     if (user.data) {
         res.locals.user = user.data
     }
     next()
     return
-}
+})
 
 export const interComMiddleware: (secret: string) => express.RequestHandler = (secret) => async (req, res, next) => {
     const authHeader = req.headers.authorization

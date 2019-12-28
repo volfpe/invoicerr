@@ -1,12 +1,12 @@
 import { Router } from 'express'
 import AuthService from '../../services/auth'
-import { Express, Errors } from 'shared';
+import { Express, Errors } from 'shared'
 
 const { ValidationApiError } = Errors
 
 const { runAsyncWrapper, ensureRole, ensureLoggedIn } = Express
 
-const route = Router();
+const route = Router()
 
 export default (app: Router) => {
   app.use('/public', route);

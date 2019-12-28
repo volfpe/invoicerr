@@ -8,7 +8,15 @@
             "type": "node",
             "request": "attach",
             "port": 9229,
-            "name": "Invoicerr debug",
+            "name": "Invoicerr auth debug",
+            "address": "localhost",
+            "protocol": "inspector"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "port": 9230,
+            "name": "Invoicerr contacts debug",
             "address": "localhost",
             "protocol": "inspector"
         }
