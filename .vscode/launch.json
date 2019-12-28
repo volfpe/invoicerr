@@ -21,6 +21,15 @@
             "name": "Invoicerr contacts debug",
             "address": "localhost",
             "protocol": "inspector"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "outFiles": [ "${workspaceFolder}/**/node_modules/**/*.js" ],
+            "port": 9231,
+            "name": "Invoicerr invoice debug",
+            "address": "localhost",
+            "protocol": "inspector"
         }
     ]
 }
