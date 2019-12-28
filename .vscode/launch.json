@@ -7,6 +7,7 @@
         {
             "type": "node",
             "request": "attach",
+            "outFiles": [ "${workspaceFolder}/**/node_modules/**/*.js" ],
             "port": 9229,
             "name": "Invoicerr auth debug",
             "address": "localhost",

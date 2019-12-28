@@ -10,7 +10,7 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w"
+    "watch": "tsc -w --declarationMap"
   },
   "devDependencies": {
     "typescript": "^3.7.3"
