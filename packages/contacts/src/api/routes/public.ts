@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { Express } from 'shared'
 import ContactService from '../../services/contact'
+import CompanyInfoService from '../../services/company-info'
 
 const { runAsyncWrapper, ensureRole, ensureLoggedIn } = Express
 
@@ -31,5 +32,17 @@ export default (app: Router) => {
     route.delete('/contact', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
         await ContactService.deleteContact(req.body.id)
         res.send(true)
+    }))
+
+    // get company info
+    route.get('/company-info', ensureLoggedIn, runAsyncWrapper(async (req, res) => {
+        const info = await CompanyInfoService.getCompanyInfo()
+        res.send(info)
+    }))
+
+    // edit company info
+    route.put('/company-info', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
+        const info = await CompanyInfoService.editCompanyInfo(req.body.company, req.body.street, req.body.city, req.body.country, req.body.ic, req.body.dic)
+        res.send(info)
     }))
 }

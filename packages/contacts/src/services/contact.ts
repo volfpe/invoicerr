@@ -1,5 +1,4 @@
 import ContactModel from '../models/contact'
-import config from '../config'
 
 const ContactService = {
     getAllContacts: async () => {
@@ -42,7 +41,7 @@ const ContactService = {
         contact.isActive = false
 
         return await contact.save()
-    }
+    },
 }
 
 export default ContactService

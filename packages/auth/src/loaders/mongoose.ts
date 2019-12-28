@@ -8,6 +8,6 @@ export default async () => {
     // if no user is in database, create default admin
     const usersCount = await AuthModel.count({})
     if(usersCount === 0) {
-        authService.addUser('admin', 'admin', 'admin')
+        await authService.addUser('admin', 'admin', 'admin')
     }
 }
