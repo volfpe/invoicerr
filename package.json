@@ -4,5 +4,15 @@
   "name": "invoicerr",
   "version": "1.0.0",
   "author": "Petr Volf <petr.volf96@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build:shared": "cd packages/shared && yarn build",
+    "build:auth": "cd packages/auth && yarn build",
+    "build:contacts": "cd packages/contacts && yarn build",
+    "build:invoice": "cd packages/invoice && yarn build",
+    "build": "yarn build:shared && yarn build:auth && yarn build:contacts && yarn build:invoice",
+    "start:auth": "cd packages/auth && yarn start",
+    "start:contacts": "cd packages/contacts && yarn start",
+    "start:invoice": "cd packages/invoice && yarn start"
+  }
 }

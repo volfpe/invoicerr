@@ -1,0 +1,44 @@
+version: '3.5'
+services:
+  mongo:
+    restart: always
+    image: mongo:3.4
+    volumes:
+      - mongo-invoicerr:/data/db
+  server:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    ports:
+      - "3030:80"
+  auth-service:
+    build:
+      context: .
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/invoicerr
+      - PORT=3000
+      - JWT_SECRET="d5b47398-3f0c-4119-8566-09b9d1627b64"
+      - COMMUNICATION_SECRET="f5fd1a1e-1242-4487-885c-3bc9cdd3ab4b"
+    command: yarn start:auth
+  contacts-service:
+    build:
+      context: .
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/invoicerr
+      - PORT=3001
+      - COMMUNICATION_SECRET="f5fd1a1e-1242-4487-885c-3bc9cdd3ab4b"
+      - AUTH_SERVICE_URL="http://auth-service:3000"
+    command: yarn start:contacts
+  invoice-service:
+    build:
+      context: .
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/invoicerr
+      - PORT=3002
+      - COMMUNICATION_SECRET="f5fd1a1e-1242-4487-885c-3bc9cdd3ab4b"
+      - AUTH_SERVICE_URL="http://auth-service:3000"
+      - CONTACTS_SERVICE_URL="http://contacts-service:3001"
+    command: yarn start:invoice
+
+volumes:
+  mongo-invoicerr:

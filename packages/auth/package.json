@@ -10,7 +10,9 @@
     "shared": "1.0.0"
   },
   "scripts": {
-    "dev": "nodemon --config \"./nodemon.json\"/"
+    "dev": "nodemon --config \"./nodemon.json\"/",
+    "build": "tsc",
+    "start": "node build/server.js"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
