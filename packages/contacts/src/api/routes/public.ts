@@ -18,13 +18,13 @@ export default (app: Router) => {
 
     // add contact // todo different role
     route.post('/contact', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
-        await ContactService.addContact(req.body.name, req.body.company, req.body.street, req.body. city, req.body.country, req.body.ic, req.body.dic)
+        await ContactService.addContact(req.body.company, req.body.street, req.body. city, req.body.country, req.body.ic, req.body.dic)
         res.send(true)
     }))
 
     // edit contact // todo different role
     route.put('/contact', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
-        const contact = await ContactService.editContact(req.body.id, req.body.name, req.body.company, req.body.street, req.body. city, req.body.country, req.body.ic, req.body.dic)
+        const contact = await ContactService.editContact(req.body.id, req.body.company, req.body.street, req.body. city, req.body.country, req.body.ic, req.body.dic)
         res.send(contact)
     }))
 

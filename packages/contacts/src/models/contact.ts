@@ -12,11 +12,6 @@ interface IContact extends mongoose.Document {
 }
 
 const ContactSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        index: true,
-    },
     company: {
         type: String,
         required: true,

@@ -10,7 +10,7 @@ export default (app: Router) => {
     app.use('/public', route)
 
     route.post('/invoice', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
-        return res.send(await InvoiceService.createInvoice(req.body.items, req.body.buyerId))
+        return res.send(await InvoiceService.createInvoice(req.body.items, req.body.buyer, req.body.seller))
     }))
 
     route.get('/invoices', ensureLoggedIn, runAsyncWrapper(async (req, res) => {
@@ -22,6 +22,10 @@ export default (app: Router) => {
     }))
 
     route.put('/invoice/:invoiceId', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
-        return res.send( await InvoiceService.editInvoice(req.params.invoiceId, req.body.items, req.body.buyerId))
+        return res.send( await InvoiceService.editInvoice(req.params.invoiceId, req.body.items, req.body.buyer, req.body.seller))
+    }))
+
+    route.delete('/invoice/:invoiceId', ensureRole(['admin']), runAsyncWrapper(async (req, res) => {
+        return res.send( await InvoiceService.deleteInvoice(req.params.invoiceId))
     }))
 }
