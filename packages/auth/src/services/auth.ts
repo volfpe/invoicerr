@@ -51,11 +51,10 @@ const AuthService = {
             throw new Error('Username already exists!');
         }
     },
-    editUser: async (id: string, username: string, role: IRoles, isActive: string, password?: string) => {
+    editUser: async (id: string, role: IRoles, password?: string) => {
         const user = await AuthModel.where('_id', id).findOne()
-        user.username = username
+
         user.role = role
-        user.isActive = isActive
         if (password) {
             user.password = await hashPassword(password)
         }
@@ -102,6 +101,26 @@ const AuthService = {
         } catch(e) {
             return null
         }
+    },
+    getUserById: async (id: string) => {
+        const user = await AuthModel.where('_id', id).findOne()
+        if (!user) {
+            throw new Error('User does not exists!')
+        }
+        return user
+    },
+    getUsers: async () => {
+        const users = await AuthModel.where('isActive', true).find()
+        return users
+    },
+    deleteUser: async (id: string) => {
+        const user = await AuthModel.where('_id', id).findOne()
+
+        if (!user) {
+            throw new Error('User does not exists!')
+        }
+        user.isActive = false
+        await user.save()
     }
 }
 
