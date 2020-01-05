@@ -4,6 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import { authMiddleware } from '../api/middlewares/auth';
 
+// initialize expressjs
 export default async (app: AuthService) => {
     app.expressApp.use(cors())
     app.expressApp.use(express.json())

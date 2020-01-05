@@ -10,6 +10,7 @@ const route = Router()
 
 export default (app: Router) => {
     app.use('/internal', route)
+    // protect internal endpoints
     route.use(interComMiddleware(config.communicationSecret))
 
     // get our company info

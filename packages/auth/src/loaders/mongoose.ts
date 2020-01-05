@@ -31,7 +31,12 @@ export default async () => {
     await connectWithRetry(config.database.url)
     // if no user is in database, create default admin
     const usersCount = await AuthModel.count({})
+
+    // intiailize user db if document is empty
     if(usersCount === 0) {
-        await authService.addUser('admin', 'admin', 'admin')
+        await authService.addUser('Admin001', '1234', 'admin')
+        await authService.addUser('User0001', '0001', 'accountant')
+        await authService.addUser('User0002', '0002', 'accountant')
+        await authService.addUser('User0003', '0003', 'user')
     }
 }

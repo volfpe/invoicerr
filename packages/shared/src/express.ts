@@ -2,6 +2,7 @@ import express from 'express'
 import { ValidationApiError } from './errors'
 import axios from 'axios'
 
+// expressjs function wrapper to catch all exceptions and return error to client
 export const runAsyncWrapper = (callback: express.RequestHandler): express.RequestHandler => {
 	return function (req, res, next) {
 	  callback(req, res, next).catch((e: any) => {
@@ -14,6 +15,7 @@ export const runAsyncWrapper = (callback: express.RequestHandler): express.Reque
 	}
 }
 
+// middleware to all non-auth services to get user object from jwt token
 export const authMiddleware: (authUrl: string, secret: string) => express.RequestHandler = (authUrl, secret) => runAsyncWrapper(async (req, res, next) => {
     // get jwt token from header
     const authHeader = req.headers.authorization
