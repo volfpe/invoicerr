@@ -68,5 +68,9 @@ export default (app: Router) => {
     }
 
     res.send(token)
+
+    route.get('/me', ensureLoggedIn, runAsyncWrapper(async (req, res) => {
+      res.send(res.locals.user)
+    }))
   }));
 };
