@@ -39,6 +39,13 @@ services:
       - AUTH_SERVICE_URL=http://auth-service:3000
       - CONTACTS_SERVICE_URL=http://contacts-service:3001
     command: yarn start:invoice
+  react:
+    build:
+      context: .
+      dockerfile: client.Dockerfile
+      args:
+        API_URL: http://localhost:3030
+    command: yarn start
 
 volumes:
   mongo-invoicerr:
