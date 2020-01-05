@@ -44,7 +44,7 @@ services:
       context: .
       dockerfile: client.Dockerfile
       args:
-        API_URL: http://localhost:3030
+        REACT_APP_API_URL: http://localhost:3030
     command: yarn start
 
 volumes:

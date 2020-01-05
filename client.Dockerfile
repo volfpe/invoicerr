@@ -1,5 +1,5 @@
 FROM node:10
-ARG API_URL
+ARG REACT_APP_API_URL
 
 COPY packages/client/ .
 RUN yarn
