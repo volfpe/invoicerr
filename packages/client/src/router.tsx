@@ -4,7 +4,6 @@ import {
     Switch,
     Route,
 } from 'react-router-dom'
-import Auth from './modules/auth/components/auth'
 import Login from './modules/auth/components/login'
 import Layout from './components/layout'
 import ContactsList from './modules/contacts/components/list'
