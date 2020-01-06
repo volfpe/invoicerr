@@ -171,7 +171,7 @@ const SideNav: React.FC<SideNavProps> = ({ onHide, visible }) => {
     let routerHistory = useHistory()
 
     const redirectToLogin = useCallback(() => {
-        routerHistory.push('/login')
+        routerHistory.push('/')
     }, [routerHistory])
 
     const { role } = useUserInfo()

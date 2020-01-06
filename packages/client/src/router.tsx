@@ -24,12 +24,8 @@ const App: React.FC = () => {
     return(
         <Router>
             <Switch>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route path="/dashboard">
-                    <Layout> Dashboard</Layout>
-                </Route>
+                
+                <Route path="/dashboard"><Layout> Dashboard</Layout></Route>
 
                 <Route path="/contacts/new"><AddContact /></Route>
                 <Route path="/contacts/:id"><EditContact /></Route>
@@ -46,9 +42,8 @@ const App: React.FC = () => {
                 <Route path="/admin"><UserList /></Route>
 
                 <Route path="/settings"><UserSettings /></Route>
-                <Route path="/">
-                    <Auth />
-                </Route>
+                
+                <Route path="/"><Login /></Route>
             </Switch>
         </Router>
     )
