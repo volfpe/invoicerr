@@ -97,7 +97,7 @@ Design is responsive.
 
 To start the project (all servers with client application), run `docker-compose up` in the project root.
 
-Client application is available at `http://localhost:4000/`
+Client application is available at `http://localhost:3030/`
 
 ### Example users
 
