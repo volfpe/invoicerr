@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 import styled, { css } from 'styled-components'
 import { textInput, COLORS, button, BREAKPOINTS_MAX, smallButton } from '../../../utils/styles'
 
@@ -40,6 +40,11 @@ const Container = styled.div`
 
         > .form-item {
             ${formItem}
+
+            > .error {
+                color: ${COLORS.alizarin};
+                margin-top: 5px;
+            }
         }
 
         > .add-button {
@@ -63,6 +68,7 @@ const Container = styled.div`
 interface FormValues {
     password: string
     newPassword: string
+    newPasswordAgain: string
 }
 
 
@@ -75,6 +81,7 @@ interface SettingsFormProps {
 const defaultInitialValues: FormValues = {
     password: '',
     newPassword: '',
+    newPasswordAgain: '',
 }
 
 const SettingsForm: React.FC<SettingsFormProps> = ({ onSubmit, initialValues }) => {
@@ -97,6 +104,14 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ onSubmit, initialValues }) 
                             <div className="form-item">
                                 <label htmlFor="newPassword">New password</label>
                                 <Field type="password" name="newPassword" id="newPassword" />
+                                <div className="error">
+                                    <ErrorMessage name="newPassword" />
+                                </div>
+                            </div>
+
+                            <div className="form-item">
+                                <label htmlFor="newPasswordAgain">New password again</label>
+                                <Field type="password" name="newPasswordAgain" id="newPasswordAgain" />
                             </div>
                             
                             <div className="buttons">
