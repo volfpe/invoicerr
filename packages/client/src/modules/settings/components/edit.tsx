@@ -16,8 +16,14 @@ const SuccessContainer = styled.div`
     align-items: center;
 `
 
-const handleSubmit = async (values: any, formikBag: Formik.FormikHelpers<any>) => {
+const handleSubmit = async (values: any, formikBag: Formik.FormikHelpers<any>, setSuccess: (success: boolean) => void) => {
+    setSuccess(false)
+    if (values.newPassword !== values.newPasswordAgain) {
+        formikBag.setErrors({ newPassword: 'Passwords do not match!' })
+        return
+    }
     await changePassword(values.password, values.newPassword)
+    setSuccess(true)
 }
 
 const UserSettings: React.FC = () => {
@@ -26,7 +32,7 @@ const UserSettings: React.FC = () => {
     return (
         <Layout>
             {success && <SuccessContainer>Success</SuccessContainer>}
-            <ContactForm onSubmit={async (values, formikBag) => {await handleSubmit(values, formikBag); setSuccess(true)}} buttonName="EDIT COMPANY INFO" />
+            <ContactForm onSubmit={(values, formikBag) => handleSubmit(values, formikBag, setSuccess)} buttonName="EDIT COMPANY INFO" />
         </Layout>
     )
 }
