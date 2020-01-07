@@ -98,18 +98,18 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({ onSubmit, isEdit, onDelete, i
                         <Form>
                             <div className="form-item">
                                 <label htmlFor="username">Username</label>
-                                <Field type="text" name="username" disabled={isEdit} />
+                                <Field type="text" name="username" id="username" disabled={isEdit} />
                             </div>
 
                             <div className="form-item">
                                 <label htmlFor="password">Password</label>
-                                <Field type="password" name="password" />
+                                <Field type="password" name="password" id="password" />
                                 {isEdit && 'leave blank to keep the same password'}
                             </div>
 
                             <div className="form-item">
                                 <label htmlFor="role">Role</label>
-                                <Field as="select" name="role">
+                                <Field as="select" name="role" id="role">
                                     {ROLES.map(role => (
                                         <option key={role} value={role}>{role}</option>
                                     ))}

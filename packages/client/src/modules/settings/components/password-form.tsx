@@ -91,12 +91,12 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ onSubmit, initialValues }) 
                             </div>
                             <div className="form-item">
                                 <label htmlFor="password">Current password</label>
-                                <Field type="password" name="password"/>
+                                <Field type="password" name="password" id="password" />
                             </div>
 
                             <div className="form-item">
                                 <label htmlFor="newPassword">New password</label>
-                                <Field type="password" name="newPassword" />
+                                <Field type="password" name="newPassword" id="newPassword" />
                             </div>
                             
                             <div className="buttons">
