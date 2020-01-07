@@ -204,27 +204,27 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({ onSubmit, onDelete, initialVa
                             </div>
                             <div className="form-item">
                                 <label htmlFor="seller.company">Company Name</label>
-                                <Field type="text" name="seller.company" />
+                                <Field type="text" name="seller.company" id="seller.company" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="seller.street">Street</label>
-                                <Field type="text" name="seller.street" />
+                                <Field type="text" name="seller.street" id="seller.street" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="seller.city">City</label>
-                                <Field type="text" name="seller.city" />
+                                <Field type="text" name="seller.city" id="seller.city" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="seller.country">Country</label>
-                                <Field type="text" name="seller.country" />
+                                <Field type="text" name="seller.country" id="seller.country" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="seller.ic">IC</label>
-                                <Field type="text" name="seller.ic" />
+                                <Field type="text" name="seller.ic" id="seller.ic" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="seller.dic">DIC</label>
-                                <Field type="text" name="seller.dic" />
+                                <Field type="text" name="seller.dic" id="seller.dic" />
                             </div>
 
                             <div className="form-section">
@@ -237,27 +237,27 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({ onSubmit, onDelete, initialVa
                             </select>
                             <div className="form-item">
                                 <label htmlFor="buyer.company">Company Name</label>
-                                <Field type="text" name="buyer.company" />
+                                <Field type="text" name="buyer.company" id="buyer.company" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="buyer.street">Street</label>
-                                <Field type="text" name="buyer.street" />
+                                <Field type="text" name="buyer.street" id="buyer.street" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="buyer.city">City</label>
-                                <Field type="text" name="buyer.city" />
+                                <Field type="text" name="buyer.city" id="buyer.city" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="buyer.country">Country</label>
-                                <Field type="text" name="buyer.country" />
+                                <Field type="text" name="buyer.country" id="buyer.country" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="buyer.ic">IC</label>
-                                <Field type="text" name="buyer.ic" />
+                                <Field type="text" name="buyer.ic" id="buyer.ic" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="buyer.dic">DIC</label>
-                                <Field type="text" name="buyer.dic" />
+                                <Field type="text" name="buyer.dic" id="buyer.dic" />
                             </div>
 
                             <div className="form-section">
@@ -270,15 +270,15 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({ onSubmit, onDelete, initialVa
                                                 <div className="group" key={index}>
                                                     <div className="form-item">
                                                         <label htmlFor={`items.${index}.name`}>Item Name</label>
-                                                        <Field type="text" name={`items.${index}.name`} />
+                                                        <Field type="text" name={`items.${index}.name`} id={`items.${index}.name`} />
                                                     </div>
                                                     <div className="form-item half">
                                                         <label htmlFor={`items.${index}.pricePerItem`}>Price Per Item</label>
-                                                        <Field type="text" name={`items.${index}.pricePerItem`} />
+                                                        <Field type="text" name={`items.${index}.pricePerItem`} id={`items.${index}.pricePerItem`} />
                                                     </div>
                                                     <div className="form-item half">
                                                         <label htmlFor={`items.${index}.quantity`}>Quantity</label>
-                                                        <Field type="text" name={`items.${index}.quantity`} />
+                                                        <Field type="text" name={`items.${index}.quantity`} id={`items.${index}.quantity`} />
                                                     </div>
                                                     <button type="button" onClick={() => arrayHelpers.remove(index)}>REMOVE</button>
                                                 </div>

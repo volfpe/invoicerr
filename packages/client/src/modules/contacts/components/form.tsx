@@ -68,28 +68,28 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, onDelete, initialVa
                 {() => (
                     <Form>
                         <div className="form-item">
-                            <label htmlFor="name">Company Name</label>
-                            <Field type="text" name="company" />
+                            <label htmlFor="company">Company Name</label>
+                            <Field type="text" name="company" id="company" />
                         </div>
                         <div className="form-item">
                             <label htmlFor="street">Street</label>
-                            <Field type="text" name="street" />
+                            <Field type="text" name="street" id="street" />
                         </div>
                         <div className="form-item">
                             <label htmlFor="city">City</label>
-                            <Field type="text" name="city" />
+                            <Field type="text" name="city" id="city" />
                         </div>
                         <div className="form-item">
                             <label htmlFor="country">Country</label>
-                            <Field type="text" name="country" />
+                            <Field type="text" name="country" id="country" />
                         </div>
                         <div className="form-item">
                             <label htmlFor="ic">IC</label>
-                            <Field type="text" name="ic" />
+                            <Field type="text" name="ic" id="ic" />
                         </div>
                         <div className="form-item">
                             <label htmlFor="dic">DIC</label>
-                            <Field type="text" name="dic" />
+                            <Field type="text" name="dic" id="dic" />
                         </div>
                         <div className="buttons">
                             <button type="submit">{buttonName}</button>
